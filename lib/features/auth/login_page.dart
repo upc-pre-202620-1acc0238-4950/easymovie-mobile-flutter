@@ -1,3 +1,4 @@
+import 'package:easy_movie/features/main/main_page.dart';
 import 'package:flutter/material.dart';
 
 class LoginPage extends StatefulWidget {
@@ -50,7 +51,15 @@ class _LoginPageState extends State<LoginPage> {
             padding: const EdgeInsets.only(left: 8.0, right: 8.0),
             child: SizedBox(
               width: double.infinity,
-              child: FilledButton(onPressed: () {}, child: Text("Sign in")),
+              child: FilledButton(
+                onPressed: () {
+                  Navigator.pushReplacement(
+                    context,
+                    MaterialPageRoute(builder: (context) => MainPage()),
+                  );
+                },
+                child: Text("Sign in"),
+              ),
             ),
           ),
         ],
