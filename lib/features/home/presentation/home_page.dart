@@ -4,24 +4,13 @@ import 'package:easy_movie/features/home/presentation/movie_card.dart';
 import 'package:easy_movie/features/home/presentation/movie_detail_page.dart';
 import 'package:flutter/material.dart';
 
-class HomePage extends StatefulWidget {
+class HomePage extends StatelessWidget {
   final HomeViewModel viewModel;
   const new({super.key, required this.viewModel});
 
-  @override
-  State<HomePage> createState() => _HomePageState();
-}
-
-class _HomePageState extends State<HomePage> {
-  @override
-  void initState() {
-    super.initState();
-    widget.viewModel.loadMovies();
-  }
 
   @override
   Widget build(BuildContext context) {
-    HomeViewModel viewModel = widget.viewModel;
     return ListenableBuilder(
       listenable: viewModel,
       builder: (context, child) {

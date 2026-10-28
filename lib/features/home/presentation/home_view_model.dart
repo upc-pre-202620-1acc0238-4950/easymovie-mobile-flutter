@@ -5,14 +5,15 @@ import 'package:flutter/material.dart';
 class HomeViewModel extends ChangeNotifier {
   final GetMoviesUseCase useCase;
 
-  HomeViewModel({required this.useCase});
+  HomeViewModel({required this.useCase}) {
+    loadMovies();
+  }
 
   List<Movie> movies = [];
   bool isLoading = false;
   String? errorMessage;
 
   Future<void> loadMovies() async {
-
     isLoading = true;
     notifyListeners();
 
@@ -20,5 +21,4 @@ class HomeViewModel extends ChangeNotifier {
     isLoading = false;
     notifyListeners();
   }
-
 }

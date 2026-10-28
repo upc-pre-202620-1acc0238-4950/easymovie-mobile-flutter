@@ -15,6 +15,11 @@ class MovieDetailPage extends StatelessWidget {
             pinned: true,
             floating: true,
             flexibleSpace: FlexibleSpaceBar(
+              centerTitle: false,
+              title: Text(
+                movie.title,
+                style: TextStyle(fontWeight: FontWeight.bold),
+              ),
               background: Hero(
                 tag: movie.id,
                 child: Image.network(
