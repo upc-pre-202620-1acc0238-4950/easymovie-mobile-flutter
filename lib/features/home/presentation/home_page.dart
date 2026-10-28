@@ -1,5 +1,7 @@
 import 'package:easy_movie/features/home/domain/movie.dart';
 import 'package:easy_movie/features/home/presentation/home_view_model.dart';
+import 'package:easy_movie/features/home/presentation/movie_card.dart';
+import 'package:easy_movie/features/home/presentation/movie_detail_page.dart';
 import 'package:flutter/material.dart';
 
 class HomePage extends StatefulWidget {
@@ -27,30 +29,20 @@ class _HomePageState extends State<HomePage> {
           return Center(child: CircularProgressIndicator());
         }
 
-        return GridView.builder(
-          gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(
-            crossAxisCount: 2,
-          ),
+        return ListView.builder(
           itemCount: viewModel.movies.length,
           itemBuilder: (context, index) {
             Movie movie = viewModel.movies[index];
-            return Column(
-              children: [
-                Expanded(
-                  child: ClipRRect(
-                    borderRadius: BorderRadiusGeometry.all(
-                      Radius.circular(8.0),
-                    ),
-                    child: Image.network(
-                      movie.poster,
-                      width: double.infinity,
-                      fit: BoxFit.cover,
-                    ),
+            return GestureDetector(
+              onTap: () {
+                Navigator.push(
+                  context,
+                  MaterialPageRoute(
+                    builder: (context) => MovieDetailPage(movie: movie),
                   ),
-                ),
-
-                Text(movie.title),
-              ],
+                );
+              },
+              child: MovieCard(movie: movie),
             );
           },
         );
