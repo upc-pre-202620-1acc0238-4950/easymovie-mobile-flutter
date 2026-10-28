@@ -1,19 +1,27 @@
 import 'package:easy_movie/features/home/domain/movie.dart';
 import 'package:easy_movie/features/home/domain/movie_repository.dart';
+import 'package:easy_movie/features/home/infrastructure/remote/movie_api.dart';
+import 'package:easy_movie/features/home/infrastructure/remote/movie_dto.dart';
 
 class MovieRepositoryImpl implements MovieRepository {
+  final MovieApi api;
+
+  const new({required this.api});
+
   @override
   Future<List<Movie>> getMovies() async {
-    await Future.delayed(Duration(seconds: 2));
-    return [
-      Movie(
-        id: 1,
-        title: 'Inception',
-        poster:
-            'https://image.tmdb.org/t/p/w500/oYuLEt3zVCKq57qu2F8dT7NIa6f.jpg',
-        director: 'Christopher Nolan',
-        rating: 4.8,
-      ),
-    ];
+    List<MovieDto> dtos = await api.getMovies();
+
+    return dtos
+        .map(
+          ((dto) => Movie(
+            id: dto.id,
+            title: dto.title,
+            poster: dto.poster,
+            director: dto.director,
+            rating: dto.rating,
+          )),
+        )
+        .toList();
   }
 }
