@@ -1,8 +1,10 @@
+import 'package:easy_movie/core/service_locator.dart';
 import 'package:easy_movie/features/onboarding/onboarding_page.dart';
 import 'package:easy_movie/core/theme.dart';
 import 'package:flutter/material.dart';
 
 void main() {
+  setupDependencies();
   runApp(const MainApp());
 }
 
