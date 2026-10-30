@@ -31,7 +31,28 @@ class MovieDetailPage extends StatelessWidget {
             ),
           ),
         ],
-        body: Text('Detail'),
+        body: Padding(
+          padding: const EdgeInsets.all(16.0),
+          child: Column(
+            crossAxisAlignment: CrossAxisAlignment.start,
+            children: [
+              Text(
+                'Release Date: ',
+                style: TextStyle(fontSize: 16),
+              ),
+              SizedBox(height: 8),
+              Text(
+                'Rating: ${movie.rating}',
+                style: TextStyle(fontSize: 16),
+              ),
+              SizedBox(height: 16),
+              Text(
+                'Description:',
+                style: TextStyle(fontSize: 14),
+              ),
+            ],
+          ),
+        )
       ),
     );
   }

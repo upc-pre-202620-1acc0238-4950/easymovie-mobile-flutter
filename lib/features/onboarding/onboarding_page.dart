@@ -21,7 +21,7 @@ class OnboardingPage extends StatelessWidget {
               end: AlignmentGeometry.bottomCenter,
               colors: [
                 Colors.transparent,
-                Theme.of(context).colorScheme.shadow.withAlpha(120),
+                Theme.of(context).colorScheme.shadow.withAlpha(200),
               ],
             ),
           ),
@@ -29,17 +29,37 @@ class OnboardingPage extends StatelessWidget {
         SafeArea(
           child: Padding(
             padding: const EdgeInsets.all(16.0),
-            child: SizedBox(
-              width: double.infinity,
-              child: FilledButton(
-                onPressed: () {
-                  Navigator.pushReplacement(
-                    context,
-                    MaterialPageRoute(builder: (context) => LoginPage()),
-                  );
-                },
-                child: Text("Continue"),
-              ),
+            child: Column(
+              spacing: 16,
+              mainAxisSize: MainAxisSize.min,
+              children: [
+                Text(
+                  "Welcome to Easy Movie",
+                  style: Theme.of(context).textTheme.headlineLarge?.copyWith(
+                        color: Theme.of(context).colorScheme.surface,
+                        fontWeight: FontWeight.bold,
+                      ),
+                ),
+
+                Text(
+                  "Discover and enjoy your favorite movies with ease.",
+                  style: Theme.of(context).textTheme.bodyLarge?.copyWith(
+                        color: Theme.of(context).colorScheme.surface,
+                      ),
+                ),
+                SizedBox(
+                  width: double.infinity,
+                  child: FilledButton(
+                    onPressed: () {
+                      Navigator.pushReplacement(
+                        context,
+                        MaterialPageRoute(builder: (context) => LoginPage()),
+                      );
+                    },
+                    child: Text("Continue"),
+                  ),
+                ),
+              ],
             ),
           ),
         ),
