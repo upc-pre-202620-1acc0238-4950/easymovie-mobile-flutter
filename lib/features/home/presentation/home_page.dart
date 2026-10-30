@@ -1,3 +1,4 @@
+import 'package:easy_movie/core/service_locator.dart';
 import 'package:easy_movie/features/home/domain/movie.dart';
 import 'package:easy_movie/features/home/presentation/home_view_model.dart';
 import 'package:easy_movie/features/home/presentation/movie_card.dart';
@@ -7,7 +8,6 @@ import 'package:flutter/material.dart';
 class HomePage extends StatelessWidget {
   final HomeViewModel viewModel;
   const new({super.key, required this.viewModel});
-
 
   @override
   Widget build(BuildContext context) {
@@ -27,11 +27,20 @@ class HomePage extends StatelessWidget {
                 Navigator.push(
                   context,
                   MaterialPageRoute(
-                    builder: (context) => MovieDetailPage(movie: movie),
+                    builder: (context) => MovieDetailPage(
+                      movie: movie,
+                      viewModel: getIt<HomeViewModel>(),
+                    ),
                   ),
                 );
               },
-              child: MovieCard(movie: movie),
+              child: MovieCard(
+                movie: movie,
+                isFavorite: viewModel.isFavorite(movie.id),
+                onToggleFavorite: () {
+                  viewModel.toggleFavoriteMovie(movie.id);
+                },
+              ),
             );
           },
         );

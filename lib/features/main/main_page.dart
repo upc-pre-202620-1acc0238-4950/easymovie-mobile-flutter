@@ -1,4 +1,5 @@
 import 'package:easy_movie/core/service_locator.dart';
+import 'package:easy_movie/features/favorites/presentation/favorites_page.dart';
 import 'package:easy_movie/features/home/presentation/home_page.dart';
 import 'package:easy_movie/features/home/presentation/home_view_model.dart';
 import 'package:flutter/material.dart';
@@ -16,7 +17,7 @@ class _MainPageState extends State<MainPage> {
   final List<Widget> pages = [
     HomePage(viewModel: getIt<HomeViewModel>()),
     Text('Watchlist'),
-    Text('Favorites'),
+    FavoritesPage(viewModel: getIt<HomeViewModel>()),
   ];
 
   @override

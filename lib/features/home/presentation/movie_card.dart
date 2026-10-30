@@ -2,8 +2,15 @@ import 'package:easy_movie/features/home/domain/movie.dart';
 import 'package:flutter/material.dart';
 
 class MovieCard extends StatelessWidget {
-  const new({super.key, required this.movie});
+  const new({
+    super.key,
+    required this.movie,
+    required this.isFavorite,
+    required this.onToggleFavorite,
+  });
   final Movie movie;
+  final bool isFavorite;
+  final Function onToggleFavorite;
 
   @override
   Widget build(BuildContext context) {
@@ -49,6 +56,10 @@ class MovieCard extends StatelessWidget {
                 ],
               ),
             ),
+          ),
+          IconButton(
+            onPressed: () => onToggleFavorite(),
+            icon: Icon(isFavorite ? Icons.favorite : Icons.favorite_outline),
           ),
         ],
       ),
