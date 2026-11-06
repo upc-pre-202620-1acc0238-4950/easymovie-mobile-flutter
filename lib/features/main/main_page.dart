@@ -1,4 +1,4 @@
-import 'package:easy_movie/core/service_locator.dart';
+import 'package:easy_movie/core/di/service_locator.dart';
 import 'package:easy_movie/features/favorites/presentation/favorites_page.dart';
 import 'package:easy_movie/features/home/presentation/home_page.dart';
 import 'package:easy_movie/features/home/presentation/home_view_model.dart';

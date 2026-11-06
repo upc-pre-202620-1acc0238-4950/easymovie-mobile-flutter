@@ -1,7 +1,7 @@
-import 'package:easy_movie/core/service_locator.dart';
+import 'package:easy_movie/core/di/service_locator.dart';
 import 'package:easy_movie/features/auth/presentation/login_view_model.dart';
 import 'package:easy_movie/features/onboarding/onboarding_page.dart';
-import 'package:easy_movie/core/theme.dart';
+import 'package:easy_movie/core/ui/theme.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 

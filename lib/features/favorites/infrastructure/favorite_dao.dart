@@ -1,4 +1,4 @@
-import 'package:easy_movie/core/app_database.dart';
+import 'package:easy_movie/core/database/app_database.dart';
 import 'package:sqflite/sqflite.dart';
 
 class FavoriteDao {

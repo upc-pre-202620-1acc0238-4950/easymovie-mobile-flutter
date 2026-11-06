@@ -1,4 +1,4 @@
-import 'package:easy_movie/core/app_database.dart';
+import 'package:easy_movie/core/database/app_database.dart';
 import 'package:easy_movie/features/auth/application/login_use_case.dart';
 import 'package:easy_movie/features/auth/domain/auth_repository.dart';
 import 'package:easy_movie/features/auth/infrastructure/auth_api.dart';
