@@ -2,6 +2,8 @@ import 'package:easy_movie/core/di/service_locator.dart';
 import 'package:easy_movie/features/favorites/presentation/favorites_page.dart';
 import 'package:easy_movie/features/home/presentation/home_page.dart';
 import 'package:easy_movie/features/home/presentation/home_view_model.dart';
+import 'package:easy_movie/features/watchlists/presentation/watchlist_page.dart';
+import 'package:easy_movie/features/watchlists/presentation/watchlist_view_model.dart';
 import 'package:flutter/material.dart';
 
 class MainPage extends StatefulWidget {
@@ -16,8 +18,8 @@ class _MainPageState extends State<MainPage> {
 
   final List<Widget> pages = [
     HomePage(viewModel: getIt<HomeViewModel>()),
-    Text('Watchlist'),
     FavoritesPage(viewModel: getIt<HomeViewModel>()),
+    WatchlistPage(viewModel: getIt<WatchlistViewModel>()),
   ];
 
   @override
@@ -38,14 +40,14 @@ class _MainPageState extends State<MainPage> {
             label: 'Home',
           ),
           NavigationDestination(
-            selectedIcon: Icon(Icons.bookmark),
-            icon: Icon(Icons.bookmark_outline),
-            label: 'Watchlist',
-          ),
-          NavigationDestination(
             selectedIcon: Icon(Icons.favorite),
             icon: Icon(Icons.favorite_outline),
             label: 'Favorites',
+          ),
+          NavigationDestination(
+            selectedIcon: Icon(Icons.bookmark),
+            icon: Icon(Icons.bookmark_outline),
+            label: 'Watchlist',
           ),
         ],
       ),

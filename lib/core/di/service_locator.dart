@@ -1,4 +1,6 @@
 import 'package:easy_movie/core/database/app_database.dart';
+import 'package:easy_movie/core/storage/secure_token_storage.dart';
+import 'package:easy_movie/core/storage/token_storage.dart';
 import 'package:easy_movie/features/auth/application/login_use_case.dart';
 import 'package:easy_movie/features/auth/domain/auth_repository.dart';
 import 'package:easy_movie/features/auth/infrastructure/auth_api.dart';
@@ -14,6 +16,12 @@ import 'package:easy_movie/features/home/domain/movie_repository.dart';
 import 'package:easy_movie/features/home/infrastructure/movie_repository_impl.dart';
 import 'package:easy_movie/features/home/infrastructure/remote/movie_api.dart';
 import 'package:easy_movie/features/home/presentation/home_view_model.dart';
+import 'package:easy_movie/features/watchlists/application/get_watched_movies_use_case.dart';
+import 'package:easy_movie/features/watchlists/domain/watchlist_repository.dart';
+import 'package:easy_movie/features/watchlists/infrastructure/remote/watchlist_api.dart';
+import 'package:easy_movie/features/watchlists/infrastructure/watchlist_repository_impl.dart';
+import 'package:easy_movie/features/watchlists/presentation/watchlist_view_model.dart';
+import 'package:flutter_secure_storage/flutter_secure_storage.dart';
 import 'package:get_it/get_it.dart';
 
 final getIt = GetIt.instance;
@@ -54,12 +62,40 @@ void setupDependencies() {
 
   getIt.registerLazySingleton<AuthApi>(() => AuthApi());
   getIt.registerLazySingleton<AuthRepository>(
-    () => AuthRepositoryImpl(api: getIt<AuthApi>()),
+    () => AuthRepositoryImpl(
+      api: getIt<AuthApi>(),
+      storage: getIt<TokenStorage>(),
+    ),
   );
   getIt.registerLazySingleton<LoginUseCase>(
     () => LoginUseCase(repository: getIt<AuthRepository>()),
   );
   getIt.registerLazySingleton<LoginViewModel>(
     () => LoginViewModel(login: getIt<LoginUseCase>()),
+  );
+
+  getIt.registerLazySingleton<FlutterSecureStorage>(
+    () => FlutterSecureStorage(),
+  );
+
+  getIt.registerLazySingleton<TokenStorage>(
+    () => SecureTokenStorage(storage: getIt<FlutterSecureStorage>()),
+  );
+
+  getIt.registerLazySingleton(
+    () => WatchlistApi(storage: getIt<TokenStorage>()),
+  );
+
+  getIt.registerLazySingleton<WatchlistRepository>(
+    () => WatchlistRepositoryImpl(api: getIt<WatchlistApi>()),
+  );
+
+  getIt.registerLazySingleton<GetWatchedMoviesUseCase>(
+    () => GetWatchedMoviesUseCase(repository: getIt<WatchlistRepository>()),
+  );
+
+  getIt.registerLazySingleton<WatchlistViewModel>(
+    () =>
+        WatchlistViewModel(getWatchedMovies: getIt<GetWatchedMoviesUseCase>()),
   );
 }
